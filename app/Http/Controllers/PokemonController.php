@@ -21,6 +21,7 @@ class PokemonController extends Controller
     
                 return [
                     'id' => $pokemon->id,
+                    'url' => $pokemon->url,
                     'nickname' => $formattedNickname,
                     'fibonacci_index' => $pokemon->fibonacci_index,
                     'created_at' => $pokemon->created_at,
@@ -42,9 +43,9 @@ class PokemonController extends Controller
         }
     }
 
-    public function find(Request $request, $url) {
+    public function find(Request $request) {
         try {
-            $pokemon = Pokemon::where('url', $url)->first();
+            $pokemon = Pokemon::where('url', $request->url)->first();
             if ($pokemon) {
                 return response()->json([
                     'status' => 200,
@@ -53,7 +54,7 @@ class PokemonController extends Controller
                 ]);
             }
             return response()->json([
-                'status' => 200,
+                'status' => 500,
                 'message' => 'Pokemon Not Found',
                 'data' => null,
             ]);
