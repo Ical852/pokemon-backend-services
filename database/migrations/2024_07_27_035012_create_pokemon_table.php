@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string("url");
             $table->string("nickname")->nullable();
-            $table->integer("fibonacci_index")->default(0);
+            $table->string("fibonacci_index")->default("");
             $table->timestamps();
         });
     }
